@@ -1,11 +1,11 @@
-<!--静的ファイルのURLを生成するstaticタグをダウンロードする-->
+<!--静的ファイルのURLを生成するstaticタグをロードする-->
 {% load static %}
-
+ 
 <!doctype html>
-<!--言語指定をenからjaに変更-->
+<!--言語設定をenからjaに変更-->>
 <html lang="ja" data-bs-theme="auto">
   <head><script src="../assets/js/color-modes.js"></script>
-
+ 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -14,18 +14,19 @@
     <!--ヘッダー情報のタイトルを個別に設定できるようにする-->
     <title>{% block title %}{% endblock %}</title>title>
     <title>Album example · Bootstrap v5.3</title>
-
-   <!--link rel="canonical..."の記述を削除-->
-   <!--Boostrap core CSS-->
-   <!--Boostrap core CSSを読み込むコードをコピー-->
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+ 
+   
+ 
+   
+ 
+ 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
     rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjc"
-    crossorigin="anonymous">
-
-    <style>
+    integrity = "sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin = "anonymous">
+ 
+ 
+  <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -33,13 +34,13 @@
         -moz-user-select: none;
         user-select: none;
       }
-
+ 
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
       }
-
+ 
       .b-example-divider {
         width: 100%;
         height: 3rem;
@@ -48,25 +49,25 @@
         border-width: 1px 0;
         box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
       }
-
+ 
       .b-example-vr {
         flex-shrink: 0;
         width: 1.5rem;
         height: 100vh;
       }
-
+ 
       .bi {
         vertical-align: -.125em;
         fill: currentColor;
       }
-
+ 
       .nav-scroller {
         position: relative;
         z-index: 2;
         height: 2.75rem;
         overflow-y: hidden;
       }
-
+ 
       .nav-scroller .nav {
         display: flex;
         flex-wrap: nowrap;
@@ -77,11 +78,11 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
-
+ 
       .btn-bd-primary {
         --bd-violet-bg: #712cf9;
         --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
+ 
         --bs-btn-font-weight: 600;
         --bs-btn-color: var(--bs-white);
         --bs-btn-bg: var(--bd-violet-bg);
@@ -98,8 +99,8 @@
         z-index: 1500;
       }
     </style>
-
-    
+ 
+   
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -117,7 +118,7 @@
         <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
       </symbol>
     </svg>
-
+ 
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
       <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
               id="bd-theme"
@@ -152,20 +153,20 @@
         </li>
       </ul>
     </div>
-
-    
+ 
+   
 <header data-bs-theme="dark">
   <div class="collapse text-bg-dark" id="navbarHeader">
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
-          <!--ヘッダーのタイトルと本文-->
+          <!--ヘッダーのタイトルと本文-->>
           <h4>お気に入りを見つけよう！</h4>
           <p class="text-body-secondary">
             誰でも参加できる写真投稿サイトです。
             自分で撮影した写真なら何でもオッケー！
             でも、カテゴリに属する写真に限ります。
-            コメントもつけてください！
+            コメントも付けてください！
           </p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
@@ -184,7 +185,7 @@
     <div class="container">
       <!--トップページへのリンク-->
       <a href="{% url 'photo:index' %}"
-      class="navbar-brand d-flex align-items-center">
+       class="navbar-brand d-flex align-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         <!--リンクテキスト-->
         <strong>Photo Gallery</strong>
@@ -195,30 +196,28 @@
     </div>
   </div>
 </header>
-
+ 
 <!--メインコンテンツ-->
 <main>
-
-<!--<main>タグの要素をすべて削除していかに置き換え-->
-<!--メインコンテンツの本体部分は各ページのテンプレートで埋め込む-->
+  <!--<main>タグの要素をすべて削除して以下に書き換え-->
+  <!--メインコンテンツの本体部分は各ページのテンプレートで埋め込む-->
   {% block contents %}{% endblock %}
-
+ 
 </main>
-
-
-<!--フッター-->
+ 
 <footer class="text-body-secondary py-5">
   <div class="container">
     <p class="float-end mb-1">
       <a href="#">Back to top</a>
     </p>
-    <!--フッターのテキストを任意にものに書き換え-->
+    <!--フッターのテキストを任意のものに書き換え-->
     <p class="mb-1">
-        Photo Gallery is &copy; Bootstrap, but please post a lot!</p>
-    <!--<p class="mb-0"から末尾まで削除-->
+      Photo Gallery is &copy; Bookstrap, but please post a lot!</p>
   </div>
 </footer>
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
+ 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFY1zcLA8N1+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM">
+  crossorigin="anonymous"</script>
     </body>
 </html>
