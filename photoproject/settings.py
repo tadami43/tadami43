@@ -142,3 +142,6 @@ EMAIL_PORT = 587                           # Gmailのポート番号
 EMAIL_HOST_USER = 'XXXX@gmail.com'         # Gmailのアドレス
 EMAIL_HOST_PASSWORD = 'XXXXXXXXXXXXXXX'    # Gmailのアプリ用パスワード
 EMAIL_USE_TLS = True                       # SMTPサーバーと通信する際にTLS（セキュア接続）を使う
+
+
+
