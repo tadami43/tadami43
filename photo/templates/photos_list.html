@@ -2,40 +2,47 @@
 
 <!--div class='album py-5 bg-light'>から４個連続の</div>までを残す-->
   <div class="album py-5 bg-light">
+    <!--Bootstrapのグリッドシステムを適用-->
     <div class="container">
-
+      <!--行要素を配置-->
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <!--レコードが格納されたobject_listからレコードを１行ずつ取り出す-->
+        {% for record in object_list %}
+        <!--列要素を配置-->
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top"
+            <!--svgタグをimgに変更src属性を追加して1参目のイメージURLを設定-->
+            <img src="{{ record.image1.url }}"
+             class="bd-placeholder-img card-img-top"
              width="100%" height="225"
-             xmlns="http://www.w3.org/2000/svg" 
-             role="img" aria-label="Placeholder: Thumbnail" 
-             preserveAspectRatio="xMidYMid slice" 
+             xmlns="http://www.w3.org/2000/svg"
+             role="img" aria-label="Placeholder: Thumbnail"
+             preserveAspectRatio="xMidYMid slice"
              focusable="false">
-             <title>Placeholder</title>
-             <rect width="100%" height="100%" fill="#55595c"/>
-            <!--<text>~</text>を削除--> 
-            </svg>
-
+             <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
+             <!--<text>~</text>を削除-->
+            </img>
+            <!--タイトルとボタンを出力するブロック-->
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text">
+                <!--タイトルフィールドを出力-->
+                {{record.title}}
+              </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
+                  <!--詳細ページを表示するボタン-->
                   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <!--テキストを変更-->
+                  <button type="button" class="btn btn-sm btn-outline-secondary">{{record.category.title}}</button>
                 </div>
-                <!--<small>タグのテキストを変更-->
-                <small class="text-muted">UserName</small>
+                <!--投稿したユーザー名を出力-->
+                <small class="text-muted">{{record.user.username}}</small>
               </div>
             </div>
           </div>
         </div>
-
-        <!--８個の<div class='col'>~</div>のブロックを削除-->
-          
-        <!--３個連続の</div>を残してドキュメントの末尾まで削除-->
-
+        <!--forブロック終了-->
+        {% endfor %}
       </div>
     </div>
   </div>
