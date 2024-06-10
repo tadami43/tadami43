@@ -1,3 +1,4 @@
+from django.db.models.query import QuerySet
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -15,6 +16,10 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 # modelsモジュールからモデルPhotoPostをインポート
 from .models import PhotoPost
+# django.views.genericからDeleteViewをインポート
+from django.views.generic import DeleteView
+# django.views.genericからDeleteViewをインポート
+from django.views.generic import DetailView
 
 class IndexView(ListView):
     '''トップページのビュー
@@ -24,6 +29,8 @@ class IndexView(ListView):
     # モデルBlogPostのオブジェクトにorder_by()を適用して
     # 投稿日時の降順で並べ替える
     queryset = PhotoPost.objects.order_by('-posted_at')
+    # 1ページに表示するレコードの件数
+    paginate_by = 9
     
 
 # デコレーターにより、CreatePhotoViewへのアクセスはログインユーザーに限定される
@@ -77,3 +84,131 @@ class PostSuccessView(TemplateView):
     '''
     # index.htmlをレンダリング
     template_name = 'post_success.html'
+
+class CategoryView(ListView):
+    '''カテゴリページのビュー
+    
+    Attribute:
+        template_name:レンダリングするテンプレート
+        paginate_by:1ページに表示するレコードの件数
+    '''
+    # index.htmlをレンダリングする
+    template_name = 'index.html'
+    # 1ページに表示するレコードの件数
+    paginate_by = 9
+
+    def get_queryset(self):
+        '''クエリを実行する
+
+        self.kwargsの取得が必要なため、クラス変数querysetではなく、
+        get_queryset()のオーバーライドによりクエリを実行する
+
+        Returns:
+            クエリによって取得されたレコード
+        '''
+        # self.kwargsでキーワードの辞書を取得し、
+        # categoryキーの値(Categoryテーブルのid)を取得する
+        category_id = self.kwargs['category']
+        # filter(フィールド名=id)で絞り込む
+        categories = PhotoPost.objects.filter(
+            category=category_id).order_by('-posted_at')
+        # クエリによって取得されたレコードを返す
+        return categories
+    
+class UserView(ListView):
+    '''ユーザーの投稿一覧ページのビュー
+    Attributes:
+        template_name: レンダリングするテンプレート
+        paginate_by: 1ページに表示するレコードの件数
+    '''
+    # index.htmlをレンダリングする
+    template_name = 'index.html'
+    # ページに表示するレコードの件数
+    paginate_by = 9
+
+    def get_queryset(self):
+        '''クエリを実行する
+        self.kwargsの取得が必要なため、クラス変数querysetではなく、
+        get_queryset()のオーバーライドによりクエリを実行する
+        
+        Return: クエリによって取得されたレコード
+        '''
+        # self.kwargsでキーワードの辞書を取得し、
+        # userキーの値(ユーザーテーブルのid)を取得
+        user_id = self.kwargs['user']
+        # field(フィールド名=id)で絞り込む
+        user_list = PhotoPost.objects.filter(
+            user=user_id).order_by('-posted_at')
+        # クエリによって取得されたレコードを返す
+        return user_list
+    
+class DetailView(DetailView):
+    '''詳細ページのビュー
+
+    投稿記事の詳細を表示するのでDetailViewを継承する
+    Attributes:
+        template_name: レンダリングするテンプレート
+        model: モデルのクラス
+    '''
+    # post.htmlをレンダリングする
+    template_name = 'detail.html'
+    # ページに表示するレコードの件数
+    model = PhotoPost
+
+class MypageView(ListView):
+    '''マイページのビュー
+
+    Attributes:
+        template_name: レンダリングするテンプレート
+        paginate_by: 1ページに表示するレコードの件数
+    '''
+    # mypage.htmlをレンダリングする
+    template_name = 'mypage.html'
+    # ページに表示するレコードの件数
+    paginate_by = 10
+
+    def get_queryset(self):
+        '''クエリを実行する
+
+        self.kwargsの取得が必要なため、クラス変数querysetではなく、
+        get_queryset()のオーバーライドによりクエリを実行する
+        
+        Return:
+            クエリによって取得されたレコード
+        '''
+        # 現在ログインしているユーザー名はHttpRequest.userに格納されている、
+        # filter(userフィールド=userオブジェクト)で絞り込む
+        queryset = PhotoPost.objects.filter(user = self.request.user).order_by('-posted_at')
+        # クエリによって取得されたレコードを返す
+        return queryset
+    
+class PhotoDeleteView(DeleteView):
+    '''レコードの削除を行うビュー
+
+    Attributes:
+        template_name: レンダリングするテンプレート
+        paginate_by: 1ページに表示するレコードの件数
+        success_url: 削除完了後のリダイレクト先のURL
+    '''
+    # 操作の対象はPhotoPostモデル
+    model = PhotoPost
+    # Photo_delete.htmlをレンダリング
+    template_name = 'photo_delete.html'
+    # 処置完了後にマイページにリダイレクト
+    success_url = reverse_lazy('photo:mypage')
+
+    def delete(self, request, *args, **kwargs):
+        '''レコードの削除を行う
+
+        Parameters:
+            self:PhotoDeleteViewオブジェクト
+            requiest:WSGIRequest(HttpRequest)オブジェクト
+            args:引数として渡される辞書(dict)
+            kwargs:キーワード月の辞書(dict)
+            {'pk':21}のようにレコードのidが渡される
+        Returns:
+            HttpResponseRedirect(success_url)を返して
+            success_urlにリダイレクト
+        '''
+        # スーパークラスのdelete()を実行
+        return super().delete(request, *args, **kwargs)
