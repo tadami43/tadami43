@@ -1,22 +1,12 @@
 <!--ここまで削除-->
 
 
+
+
 <!--div class='album py-5 bg-light'>から４個連続の</div>までを残す-->
   <div class="album py-5 bg-light">
     <!--Bootstrapのグリッドシステムを適用-->
-    <div class="container">
-      <div style="display: flex; justify-content: space-between;">
-        <ul style="list-style: none; display: flex;">
-            <li style="margin-right: 10px;"><a href="{% url 'photo:index' %}" class="text-black">新しい順</a></li>
-            <li style="margin-right: 10px;"><a href="{% url 'photo:asc' %}" class="text-black">古い順</a></li>
-            <li><a href="{% url 'photo:nice_desc' %}" class="text-black">ストライク順</a></li>
-        </ul>
-        <!--検索ボタン-->
-        <form action="{% url 'photo:result_list' %}" method="get" style="text-align:right;">
-            <input name="query" value="{{ request.GET.query }}" type="text" />
-            <button type="submit" class="btn btn-primary my-2 btn-sm">検索する</button>
-        </form>
-      </div>
+    
 
       <!--行要素を配置-->
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -48,17 +38,20 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <!--詳細ページを表示するボタン-->
-                  <button type="button" class="btn btn-sm btn-outline-secondary"
-                  onclick="location.href='{% url 'photo:photo_detail' record.pk %}'">View</button>
-                  <!--カテゴリを表示するボタン-->
-                  <button type="button"
-                  class="text-nowrap btn btn-sm btn-outline-secondary"
-                  onclick="location.href='{% url 'photo:photos_cat' category=record.category.id %}'">
-                  {{record.category.title}}</button>
-                  <button type="button" class="text-nowrap btn btn-sm btn-outline-secondary" 
-                  onclick="location.href='{% url 'photo:nice_success' pk=record.pk %}'">
-                  {{ record.nice }}ストライク</button>
+                    <button type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                        onclick="location.href='{% url 'photo:photo_detail' record.pk %}'"
+                        style="line-height: 1.5;">View</button>
+                    <button type="button"
+                        class="text-nowrap btn btn-sm btn-outline-secondary"
+                        onclick="location.href='{% url 'photo:photos_cat' category=record.category.id %}'"
+                        style="line-height: 1.5;">{{ record.category.title }}</button>
+                    <button type="button"
+                        class="text-nowrap btn btn-sm btn-outline-secondary"
+                        onclick="location.href='{% url 'photo:nice_success' pk=record.pk %}'"
+                        style="line-height: 1.5;"><p style="color: red; margin: 0;">{{ record.nice }}ストライク</p></button>
                 </div>
+
                 <!--投稿したユーザー名を出力-->
                 <a href="{% url 'photo:user_list' user=record.user.id %}">
                   <small class="text-muted">{{record.user.username}}</small></a>
