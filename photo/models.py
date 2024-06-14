@@ -2,6 +2,15 @@ from django.db import models
 # accountsアプリのmodelsモジュールからCustomUserをインポート
 from accounts.models import CustomUser
 
+#いいねかんれん
+class PhotoPost(models.Model):
+    # 既存のフィールドがあるとする
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    # 新しいフィールドを追加
+    nice = models.IntegerField(default=0)  # この例では、デフォルト値を0に設定しています
+ 
+ 
 class Category(models.Model):
     '''投稿する写真カテゴリを管理するモデル
     
@@ -21,7 +30,7 @@ class Category(models.Model):
 class PhotoPost(models.Model):
     '''投稿されたデータを管理するモデル
     '''
-    # CustomUserモデル（のuser id）トPhotoPostモデルを
+    # CustomUserモデル（のuser id）とPhotoPostモデルを
     # 1対多の関係で結びつける
     # CustomUserが親でPhotoPostが子の関係となる
     user = models.ForeignKey(CustomUser,
@@ -66,10 +75,15 @@ class PhotoPost(models.Model):
         verbose_name = '投稿日時',     # フィールドのタイトル
         auto_now_add = True          #日時を自動追加
     )
-
     def __str__(self):
         '''オブジェクトを文字列に変換して返す
         
         Return(str):投稿記事のタイトル
         '''
         return self.title
+
+        #いいねかんれん
+    nice = models.IntegerField(
+ 
+        default = 0
+    )

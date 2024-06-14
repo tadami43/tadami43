@@ -20,7 +20,24 @@ from .models import PhotoPost
 from django.views.generic import DeleteView
 # django.views.genericからDeleteViewをインポート
 from django.views.generic import DetailView
+#tuiks
+from django.db.models import F
+ 
+from django.shortcuts import redirect, get_object_or_404
+from .models import PhotoPost
+from django.urls import reverse
 
+ 
+def mypage_view(request):
+    # ビューのロジックを記述する
+    return render(request, 'base.html')
+ 
+def nice_success(request, pk):
+    post = get_object_or_404(PhotoPost, pk=pk)
+    post.nice += 1  # niceフィールドを1増やす
+    post.save()     # 保存する
+    return redirect('mypage_view')  # 成功したらどこかにリダイレクトする
+ 
 class IndexView(ListView):
     '''トップページのビュー
     '''
@@ -30,7 +47,7 @@ class IndexView(ListView):
     # 投稿日時の降順で並べ替える
     queryset = PhotoPost.objects.order_by('-posted_at')
     # 1ページに表示するレコードの件数
-    paginate_by = 9
+    paginate_by = 15
     
 
 # デコレーターにより、CreatePhotoViewへのアクセスはログインユーザーに限定される
@@ -95,7 +112,7 @@ class CategoryView(ListView):
     # index.htmlをレンダリングする
     template_name = 'index.html'
     # 1ページに表示するレコードの件数
-    paginate_by = 9
+    paginate_by = 15
 
     def get_queryset(self):
         '''クエリを実行する
@@ -124,7 +141,7 @@ class UserView(ListView):
     # index.htmlをレンダリングする
     template_name = 'index.html'
     # ページに表示するレコードの件数
-    paginate_by = 9
+    paginate_by = 15
 
     def get_queryset(self):
         '''クエリを実行する
@@ -165,7 +182,7 @@ class MypageView(ListView):
     # mypage.htmlをレンダリングする
     template_name = 'mypage.html'
     # ページに表示するレコードの件数
-    paginate_by = 10
+    paginate_by = 15
 
     def get_queryset(self):
         '''クエリを実行する
@@ -212,3 +229,55 @@ class PhotoDeleteView(DeleteView):
         '''
         # スーパークラスのdelete()を実行
         return super().delete(request, *args, **kwargs)
+
+
+class ResultView(ListView):
+    template_name = 'result_list.html'
+    paginate_by = 15
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        if query:
+            result_list = PhotoPost.objects.filter(
+                title__icontains=query).order_by('-posted_at')
+        else:
+            result_list = PhotoPost.objects.all().order_by('-posted_at')
+        return result_list
+    
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import PhotoPost
+ 
+def count(request, pk):
+    # 指定されたPKに一致するPhotoPostオブジェクトを取得する
+    post = get_object_or_404(PhotoPost, pk=pk)
+   
+    # セッションから、このユーザーがこの投稿にいいねをしたかどうかをチェック
+    liked_posts = request.session.get('liked_posts', [])
+   
+    # この投稿がユーザーのいいねリストにあるかどうかをチェック
+    if pk in liked_posts:
+        # 既にいいねを押している場合は、いいねを取り消す
+        post.nice -= 1
+        liked_posts.remove(pk)
+    else:
+        # いいねを追加する
+        post.nice += 1
+        liked_posts.append(pk)
+   
+    # セッションにいいねした投稿のリストを保存する
+    request.session['liked_posts'] = liked_posts
+   
+    # 投稿を保存する
+    post.save()
+   
+    # リダイレクトする
+    return redirect('http://127.0.0.1:8000/')
+
+class AscView(ListView):
+    template_name = 'asc.html'
+    queryset = PhotoPost.objects.order_by('posted_at')
+    paginate_by = 15
+
+class NiceDescView(ListView):
+    template_name = 'nice_desc.html'
+    queryset = PhotoPost.objects.order_by('-nice')
+    paginate_by = 15

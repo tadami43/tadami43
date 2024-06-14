@@ -1,7 +1,7 @@
 <!--ベーステンプレートを適用する-->
 {% extends 'base.html' %}
 <!--ヘッダー情報のページタイトルを設定する-->
-{% block title %}My Ball Shelf{% endblock %}
+{% block title %}My Ball Gallery{% endblock %}
 
     {% block contents %}
 
@@ -15,3 +15,27 @@
     {% include "pagination.html" %}
 
     {% endblock %}
+
+    <!--追加0613-->
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My App</title>
+    </head>
+    <body>  
+        {% if user.is_authenticated %}        
+            <button id="like-button">いいね！</button>    
+        {% endif %}  
+        <script>
+            // ログインしているユーザーのみがいいねボタンをクリックできるようにする
+            {% if user.is_authenticated %}
+                document.getElementById('like-button').addEventListener('click', function() {
+                    // いいねボタンがクリックされた時の処理
+                    alert('いいねしました！');
+                });
+            {% endif %}
+        </script>
+    </body>
+    </html>
+     

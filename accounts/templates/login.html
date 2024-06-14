@@ -46,7 +46,7 @@
     <main class="form-signin">
       <!--ユーザー名とパスワードが一致しない場合のメッセージ-->
       {% if form.errors %}
-        <p style="color: red">ユーザー名とパスワードが一致しません。</p>
+        <p style="color: rgb(225, 0, 0)">ユーザー名とパスワードが一致しません。</p>
       {% endif %}
       <!--ログインフォームを配置-->
       <form method="post">
@@ -90,6 +90,7 @@
         <!--<p>~</p>をパスワードリセットページのリンクテキストに書き換え-->
         <br><br>
         <p><a href="{% url 'password_reset' %}">パスワードを忘れましたか？</a></p>
+        <p><a href="{% url 'photo:index' %}">My Ball Galleryのトップページへ</a></p>
         <!--ログイン直後のリダイレクト先（トップページ）のURLパターンを設定-->
         <input type="hidden"
                 name="next"

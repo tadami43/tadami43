@@ -15,17 +15,7 @@
     <title>{% block title %}{% endblock %}</title>
     <title>Album example · Bootstrap v5.3</title>
  
-   
- 
-   
- 
- 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity = "sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-    crossorigin = "anonymous">
- 
- 
+
   <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -98,6 +88,13 @@
       .bd-mode-toggle {
         z-index: 1500;
       }
+      #navbarHeader {
+        background-color: hsl(0, 0%, 13%);
+        margin: 0;
+      }
+      
+      
+      
     </style>
  
    
@@ -119,40 +116,6 @@
       </symbol>
     </svg>
  
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-              id="bd-theme"
-              type="button"
-              aria-expanded="false"
-              data-bs-toggle="dropdown"
-              aria-label="Toggle theme (auto)">
-        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
-        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-            Light
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
-            Dark
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#circle-half"></use></svg>
-            Auto
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-      </ul>
-    </div>
  
    
 <header data-bs-theme="dark">
@@ -161,28 +124,29 @@
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
           <!--ヘッダーのタイトルと本文-->
-          <h4>お気に入りを見つけよう！</h4>
-          <p class="text-body-secondary">
-            誰でも参加できる写真投稿サイトです。
-            ボールの写真なら何でもオッケー！<br>
-            ※カテゴリに属する写真に限ります。
+          <h3 class="text-white"; _ngcontent-ng-c3722798491 dir="auto" 
+          class="text-container" style="font-family: 'Roboto', sans-serif;">あなただけのお気に入りのMy Ballを見つけよう!!</h3>
+          <p class="text-white"; _ngcontent-ng-c3722798491 dir="auto" 
+          class="text-container" style="font-family: 'Zen Maru Gothic', sans-serif";>
+            プロボウラー御用達写真投稿サイトです。あなただけのMy Ballを投稿しよう。<br>
+            ストライクボタンで気分上々↑↑　レッツボウリング!!
           </p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
-          <h4>Contact</h4>
+          <h4 class="text-white">Contact</h4>
           <ul class="list-unstyled">
             <!--ナビゲーションメニュー-->
             {% if user.is_authenticated %}
             <!--ログイン中のメニュー-->
-            <li><a href="{% url 'photo:mypage' %}" class="text-black">マイページ</a></li>
-            <li><a href="{% url 'accounts:logout' %}" class="text-black">ログアウト</a></li>
-            <li><a href="{% url 'password_reset' %}" class="text-black">パスワードのリセット</a></li>
-            <li><a href="mailto:admin@example.com" class="text-black">Email me</a></li>
+            <li><a href="{% url 'photo:mypage' %}" class="text-white">マイページ</a></li>
+            <li><a href="{% url 'accounts:logout' %}" class="text-white">ログアウト</a></li>
+            <li><a href="{% url 'password_reset' %}" class="text-white">パスワードのリセット</a></li>
+            <li><a href="mailto:admin@example.com" class="text-white">Email me</a></li>
             {% else %}
             <!--ログイン状態ではない場合のメニュー-->
-            <li><a href="{% url 'accounts:signup' %}" class="text-black">サインアップ</a></li>
-            <li><a href="{% url 'accounts:login' %}" class="text-black">ログイン</a></li>
-            <li><a href="mailto:admin@example.com" class="text-black">Email me</a></li>
+            <li><a href="{% url 'accounts:signup' %}" class="text-white">サインアップ</a></li>
+            <li><a href="{% url 'accounts:login' %}" class="text-white">ログイン</a></li>
+            <li><a href="mailto:admin@example.com" class="text-white">Email me</a></li>
             {% endif %}
           </ul>
         </div>
@@ -194,17 +158,25 @@
       <!--トップページへのリンク-->
       <a href="{% url 'photo:index' %}"
        class="navbar-brand d-flex align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+        <!-- 画像を埋め込む -->
+        <image xlink:href="{% static 'img/pin.png' %}" x="0" y="0" width="40" height="40" />
+      </svg>
         <!--リンクテキスト-->
-        <strong>My Ball Shelf</strong>
+        <strong>My Ball Gallery</strong>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
   </div>
+   
 </header>
- 
+
+
+
 <!--メインコンテンツ-->
 <main>
   <!--<main>タグの要素をすべて削除して以下に書き換え-->
@@ -216,16 +188,21 @@
 <footer class="text-body-secondary py-5">
   <div class="container">
     <p class="float-end mb-1">
-      <a href="#">Back to top</a>
+      <a href="#"><img src="https://media.tenor.com/N-qb3rRTr94AAAAi/bowling-ball-bowling.gif" width="80" height="80"></a>
     </p>
     <!--フッターのテキストを任意のものに書き換え-->
     <p class="mb-1">
-      My Ball Shelf is &copy; Bookstrap, but please post a lot!</p>
+      My Ball Gallery is &copy; Bootstrap, but please post a lot!</p>
   </div>
 </footer>
  
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity = "sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin = "anonymous">
     </body>
 </html>

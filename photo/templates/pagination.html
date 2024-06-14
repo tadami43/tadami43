@@ -1,54 +1,34 @@
-<!--ページネーションのアイコンを中央に配置-->
-<ur class="pagination" style="justify-content:center">
-    <!--前ページを表示するアイコンとリンクの設定ページネーションされたpageオブジェクトをorderby-recordsで取得-->
-    <!--Page.has_previous:直前にページがある場合にTrueを返す-->
-    {% if page_obj.has_previous %}
-    <!--前ページが存在する場合はそのページへのリンクが設定されたアイコン[<<]を表示-->
-    <!--Page.previous_page_number:直前のページ番号を返す-->
+<ul class="pagination" style="justify-content:center">
+ 
+    {% if page_obj.number > 1 %}
     <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+        <a class="page-link" href="?page=1" aria-label="first">
             <span aria-hidden="true">&laquo;</span>
         </a>
     </li>
     {% endif %}
-    <!--
-        すべてのページについてページ番号のアイコンを表示
-        paginator.page_range:[1,2,3,4]のように1から始まる
-        パージ番号で返す
-        page_obj.paginator.page_rangeとして取得
-        ブロックパラメーターnumに順次取り出される
-    -->
+ 
     {% for num in page_obj.paginator.page_range %}
-        <!--
-            各ページのアイコンを出力
-            page.number:引き渡されたページのページ番号
-        -->
+ 
         {% if page_obj.number == num %}
-        <!--
-            処理中のパージ番号が引き渡されたページのページ番号と一致する場合は
-            ぺージ番号のアイコン（アクティブ数）を表示
-        -->
-        <li class="page-item active"><span class=page-link>{{ num }}</span></li>
-        <!--
-            ページ番号が引き渡されたページ番号と一致しない場合
-        -->
+ 
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
         {% else %}
-        <!--
-            ページ番号のアイコン（アクティブ状態ではない）にリンクを設定して表示
-        -->
+ 
         <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-        {% endif %}
+        {% endif %}  
     {% endfor %}
-    <!--
-        次ページへのリンク時を示すアイコンの表示
-        page.has_next:次のページがある場合にTrueを返す
-    -->
     {% if page_object.has_next %}
-    <!--
-        次ページが存在する場合はリンクをっ設定したアイコン「>>」を表示
-        page.next_page_number:次のページ番号を返す
-    -->
-    <li class="page-item"><a class="page-link" href="?page{{ page_obj.next_page_number }}"
-        aria-label="Next"><span aria-hidden="true"></span></a></li>
+ 
+    <li class="page-item"><a class="page-link" href="page{{ page_obj.next_page_number }}"
+        aria-label="Next"><span aria-hidden="true"></a><li>
     {% endif %}
-</ur>
+ 
+    {% if page_obj.number < page_obj.paginator.num_pages %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="last">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+    {% endif %}
+</ul>

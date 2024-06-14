@@ -17,7 +17,7 @@ urlpatterns = [
 
     # カテゴリ一覧ページ
     # photos/<Categoryテーブルのid値>にマッチング
-    # <int:category>ハ辞書{category: id値(int)}としてCategoryViewに渡される
+    # <int:category>は辞書{category: id値(int)}としてCategoryViewに渡される
     path('photos/<int:category>', views.CategoryView.as_view(), name = 'photos_cat'),
 
     # ユーザーの投稿一覧ページ
@@ -38,5 +38,21 @@ urlpatterns = [
     # photo/<Photo postsテーブルのid値>/detailにマッチング
     # <int:pk>は辞書{pk: id値(int)}としてPhotoDeleteViewに渡される
     path('photo/<int:pk>/detail/', views.PhotoDeleteView.as_view(), name ='photo_delete'),
+
+    # 検索結果一覧ページ
+    path('result_list/', views.ResultView.as_view(), name='result_list'),
+
+#tuika
+    path('photo/<int:pk>/nice/', views.count, name = 'nice_success'),
  
+    path('mypage/', views.mypage_view, name='mypage_view'),
+
+# ソート
+    path('old/', views.AscView.as_view(), name='asc'),
+    path('st/', views.NiceDescView.as_view(), name='nice_desc'),
+
+   
 ]
+
+
+ 

@@ -18,7 +18,7 @@
             {% else %}
                 <p>投稿<strong>{{ object_list.count }}</strong>件</p>
             {% endif %}
-            <a href="{% url 'photo:post' %}">投稿する</a>
+            <a href="{% url 'photo:post' %}" class="btn btn-primary my-2">投稿する</a>
         </div>
         <hr>
     {% endif %}
