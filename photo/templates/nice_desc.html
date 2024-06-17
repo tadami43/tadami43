@@ -5,6 +5,18 @@
 
     {% block contents %}
     {% include "photos_title.html" %}
+    <div style="display: flex; justify-content: space-between;">
+        <ul style="list-style: none; display: flex;">
+            <li style="margin-right: 10px;"><a href="{% url 'photo:index' %}" class="text-black" style="background-color: white; padding: 5px 10px; border-radius: 5px;">新しい順</a></li>
+            <li style="margin-right: 10px;"><a href="{% url 'photo:asc' %}" class="text-black" style="background-color: white; padding: 5px 10px; border-radius: 5px;">古い順</a></li>
+            <li><a href="{% url 'photo:nice_desc' %}" class="text-black" style="background-color: white; padding: 5px 10px; border-radius: 5px;">ストライク順</a></li>
+        </ul>
+        <!--検索ボタン-->
+        <form action="{% url 'photo:result_list' %}" method="get" style="text-align:right;">
+            <input name="query" value="{{ request.GET.query }}" type="text" />
+            <button type="submit" class="btn btn-primary my-2 btn-sm">検索する</button>
+        </form>
+    </div>
     
 
     <!--投稿一覧テンプレートの組み込み-->

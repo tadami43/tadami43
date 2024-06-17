@@ -281,3 +281,16 @@ class NiceDescView(ListView):
     template_name = 'nice_desc.html'
     queryset = PhotoPost.objects.order_by('-nice')
     paginate_by = 15
+
+
+
+
+
+def result_list(request):
+    query = request.GET.get('query', '')  # クエリを取得する。なければ空文字列をデフォルトとする。
+
+    context = {
+        'query': query,
+        # 他の必要なコンテキストデータを追加する
+    }
+    return render(request, 'result_list.html', context)
