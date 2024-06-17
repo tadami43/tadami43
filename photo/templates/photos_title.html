@@ -30,7 +30,18 @@
           max-height: 100%; /* 画像の高さを自動的にリサイズしない */
         }
         
-        /* スライドレールの枠 */
+        .content:nth-child(1) {
+          background-color: #ffffff;
+          }
+          .content:nth-child(2) {
+          background-color: #ffffff;
+          }
+          .content:nth-child(3) {
+          background-color: #ffffff;
+          }
+          .content:nth-child(4) {
+          background-color: rgb(255, 255, 255);
+          }
         .wrap {
           overflow: hidden;
           display: flex;
@@ -60,12 +71,10 @@
             transform: translateX(-100%);
         }
         }
-        /* ホバー時に動きを止める（パターン2・3）*/
         .slide-paused:hover .slideshow {
         -webkit-animation-play-state: paused;
         animation-play-state: paused;
         }
-        /* ホバー時の装飾（パターン3） */
         .content-hover {
         transition: all 0.2s;
         margin-right: 20px;
