@@ -1,5 +1,17 @@
 <!--ここまで削除-->
-
+<style>
+  p {
+        font-size: 20px;
+        color: #fff8f8; /* 文字色を黒に設定 */
+        font-family: 'Roboto', sans-serif; /* フォントを指定 */
+        text-shadow: 
+          -1px -1px 0 #ffffff00,  
+          1px -1px 0 #ffffff00,
+          -1px  1px 0 #ffffff00,
+          1px  1px 0 #ffffff00; /* 縁取りの影の設定 */
+        font-weight: 700;
+      }
+</style>
 
 
 
@@ -31,10 +43,10 @@
             </img>
             <!--タイトルとボタンを出力するブロック-->
             <div class="card-body">
-              <p class="card-text">
+              <h4 class="card-text">
                 <!--タイトルフィールドを出力-->
                 {{record.title}}
-              </p>
+              </h4>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <!--詳細ページを表示するボタン-->

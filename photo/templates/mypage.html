@@ -14,9 +14,9 @@
         <div style="text-align:center">
             <h4>{{ user.username}}さんのマイページ</h4>
             {% if object_list.count == 0 %}
-                <p>{{ user.username}}さんの投稿はありません</p>
+                <h6>{{ user.username}}さんの投稿はありません</h6>
             {% else %}
-                <p>投稿<strong>{{ object_list.count }}</strong>件</p>
+                <h6>投稿<strong>{{ object_list.count }}</strong>件</h6>
             {% endif %}
             <a href="{% url 'photo:post' %}" class="btn btn-primary my-2">投稿する</a>
         </div>
