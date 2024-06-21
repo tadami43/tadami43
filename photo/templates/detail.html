@@ -3,7 +3,18 @@
 <!--ヘッダー情報のページタイトルを設定する-->
 {% block title %}Photo Detail{% endblock %}
 
+
     {% block contents %}
+    {% block styles %}
+<style>
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block; /* すべてのブラウザで画像が正しく動作するようにします */
+        margin: auto; /* 画像を親要素の中央に配置します */
+    }
+</style>
+{% endblock %}
     <!--Bootstrapのグリッドシステム-->
     <br>
     <div class="container">
