@@ -1,4 +1,3 @@
-
 <ul class="pagination" style="justify-content:center">
  
     {% if page_obj.number > 1 %}
@@ -27,7 +26,7 @@
  
     {% if page_obj.number < page_obj.paginator.num_pages %}
     <li class="page-item">
-        <a class="page-link" href="?page=2" aria-label="last"><!--最後にとばないんだよね（正解）<a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="last">-->
+        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="last"><!--最後にとばないんだよね（正解）<a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="last">-->
             <span aria-hidden="true">&raquo;</span>
         </a>
     </li>
